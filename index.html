@@ -9,14 +9,23 @@
   </head>
   <body>
     <div id="boardAndMenu">
-      <div id="menu">
-        <h1>Magic board</h1>
-        <input type="range" id="range" min="0" max="100" value="16" />
-        <p id="rangeValue"></p>
+      <div id="menuAndFooter">
+        <div id="menu">
+          <h1>Magic board</h1>
+          <input type="range" id="range" min="1" max="100" value="16" />
+          <p id="rangeValue"></p>
+          <div class="toggle-wrapper">
+            <h2>Lines</h2>
+            <div class="toggle-container">
+              <div class="toggle-button"></div>
+            </div>
+          </div>
+        </div>
+        <a id="footerGithubLogo" href="https://github.com/SebastianFonseca/"
+          ><img src="github.png"
+        /></a>
       </div>
-      <div id="boardContainer">
-        <div id="board"></div>
-      </div>
+      <div id="boardContainer"></div>
     </div>
   </body>
 </html>

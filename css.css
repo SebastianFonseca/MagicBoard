@@ -1,6 +1,6 @@
 #boardAndMenu {
-  height: 100vh;
-  width: 100vw;
+  height: 97vh;
+  width: 99vw;
   background-color: whitesmoke;
   display: flex;
   justify-content: center;
@@ -8,6 +8,7 @@
   font-family: "Poppins", sans-serif;
   margin: 0;
   position: relative;
+  box-sizing: border-box;
 }
 
 #boardContainer {
@@ -17,7 +18,7 @@
   flex: 7;
 }
 
-#board {
+.board {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
@@ -26,12 +27,37 @@
   background-color: white;
 }
 
+#menuAndFooter {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 3;
+}
+
 #menu {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  flex: 3;
+
+  height: 100%;
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+#footerGithubLogo {
+  align-self: center;
+  margin-top: auto;
+}
+
+img {
+  max-width: 100%;
+  height: 50px;
+  width: 50px;
 }
 
 .squares {
@@ -39,7 +65,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: black 1px solid;
+}
+
+.no-border .squares {
+  border: black 0.5px solid;
 }
 
 /* Remove default styles */
@@ -74,4 +103,41 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
+}
+
+/* Contenedor del interruptor */
+.toggle-container {
+  width: 60px;
+  height: 30px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: background 0.3s ease;
+  margin: 2px;
+}
+
+/* Botón circular */
+.toggle-button {
+  width: 24px;
+  height: 24px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  left: 3px;
+  transition: transform 0.3s ease;
+}
+
+/* Estado encendido */
+.toggle-container.on {
+  background: black;
+}
+
+.toggle-container.on .toggle-button {
+  transform: translateX(30px);
+  background: white;
 }

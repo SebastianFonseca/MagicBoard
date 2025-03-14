@@ -1,4 +1,5 @@
-const board = document.getElementById("board");
+const board = document.createElement("div");
+board.classList.add("board");
 const boardAndMenu = document.getElementById("boardAndMenu");
 const boardContainer = document.querySelector("#boardContainer");
 const range = document.querySelector("#range");
@@ -8,6 +9,7 @@ createBoard();
 
 range.addEventListener("change", () => {
   rangeValueLabel.textContent = range.value;
+  board.innerHTML = "";
   boardContainer.removeChild(board);
   createBoard(range.value);
 });
@@ -17,7 +19,7 @@ function createBoard(numberOfSquares = 16) {
     Math.min(
       boardAndMenu.getBoundingClientRect().width,
       boardAndMenu.getBoundingClientRect().height
-    ) * 0.6;
+    ) * 0.9;
   board.style.cssText += `width:${size}px; height:${size}px;`;
   const squareSize = size / numberOfSquares;
   for (let i = 1; i <= numberOfSquares * numberOfSquares; i++) {
@@ -30,4 +32,12 @@ function createBoard(numberOfSquares = 16) {
     );
     board.appendChild(newDiv);
   }
+  boardContainer.appendChild(board);
 }
+
+const toggle = document.querySelector(".toggle-container");
+
+toggle.addEventListener("click", () => {
+  toggle.classList.toggle("on"); // Cambia entre on/off
+  board.classList.toggle("no-border");
+});
