@@ -26,10 +26,13 @@ function createBoard(numberOfSquares = 16) {
     const newDiv = document.createElement("div");
     newDiv.classList.add("squares");
     newDiv.style.cssText += `width:${squareSize}px; height:${squareSize}px;`;
-    newDiv.addEventListener(
-      "mouseenter",
-      () => (newDiv.style.backgroundColor = "black")
-    );
+    newDiv.addEventListener("mouseenter", (event) => {
+      let currentOpacity = parseFloat(
+        window.getComputedStyle(newDiv).getPropertyValue("opacity")
+      );
+      let newOpacity = Math.min(currentOpacity + 0.1, 1); // Máximo 1
+      event.currentTarget.style.opacity = newOpacity;
+    });
     board.appendChild(newDiv);
   }
   boardContainer.appendChild(board);
@@ -41,3 +44,10 @@ toggle.addEventListener("click", () => {
   toggle.classList.toggle("on"); // Cambia entre on/off
   board.classList.toggle("no-border");
 });
+
+window.onresize = (event) => {
+  board.innerHTML = "";
+  boardContainer.removeChild(board);
+  range.value = 16;
+  createBoard(range.value);
+};
