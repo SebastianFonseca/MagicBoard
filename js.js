@@ -27,10 +27,16 @@ function createBoard(numberOfSquares = 16) {
     newDiv.classList.add("squares");
     newDiv.style.cssText += `width:${squareSize}px; height:${squareSize}px;`;
     newDiv.addEventListener("mouseenter", (event) => {
+      if (bwToggle.classList.contains("on")) {
+        newDiv.style.cssText += `background-color:${randomColor()};`;
+      } else {
+        newDiv.style.cssText += `background-color:black;`;
+      }
+
       let currentOpacity = parseFloat(
         window.getComputedStyle(newDiv).getPropertyValue("opacity")
       );
-      let newOpacity = Math.min(currentOpacity + 0.1, 1); // Máximo 1
+      let newOpacity = Math.min(currentOpacity + 0.333, 1); // Máximo 1
       event.currentTarget.style.opacity = newOpacity;
     });
     board.appendChild(newDiv);
@@ -38,16 +44,29 @@ function createBoard(numberOfSquares = 16) {
   boardContainer.appendChild(board);
 }
 
-const toggle = document.querySelector(".toggle-container");
+const linesToggle = document.querySelector("#linesToggle-container");
 
-toggle.addEventListener("click", () => {
-  toggle.classList.toggle("on"); // Cambia entre on/off
+linesToggle.addEventListener("click", () => {
+  linesToggle.classList.toggle("on"); // Cambia entre on/off
   board.classList.toggle("no-border");
+});
+
+const bwToggle = document.querySelector("#bwToggle-container");
+
+bwToggle.addEventListener("click", () => {
+  bwToggle.classList.toggle("on"); // Cambia entre on/off
 });
 
 window.onresize = (event) => {
   board.innerHTML = "";
   boardContainer.removeChild(board);
   range.value = 16;
+  rangeValueLabel.textContent = range.value;
   createBoard(range.value);
 };
+
+function randomColor() {
+  return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(
+    Math.random() * 256
+  )},${Math.floor(Math.random() * 256)})`;
+}
